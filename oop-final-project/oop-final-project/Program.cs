@@ -11,3 +11,13 @@ class Coordinate
         Column = column;
     }
 }
+
+class Player
+{
+    public char Symbol { get; }
+
+    public Player(char symbol)
+    {
+        Symbol = symbol;
+    }
+}
