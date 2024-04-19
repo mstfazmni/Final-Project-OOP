@@ -151,5 +151,61 @@ class Board
         }
         return true;
     }
+}
 
+//class for managing the game
+
+class Game
+{
+    private Board board;
+    private Player[] players;
+    private int currentPlayerIndex;
+
+    public Game(Player player1, Player player2)
+    {
+        board = new Board();
+        players = new Player[] { player1, player2 };
+        currentPlayerIndex = 0;
+    }
+
+    public void Start()
+    {
+        bool gameEnded = false;
+        while (!gameEnded)
+        {
+            // Print the board
+            board.Print();
+
+            Player currentPlayer = players[currentPlayerIndex];
+
+            Coordinate move = currentPlayer.MakeMove();
+
+            if (board.IsValidMove(move.Column))
+            {
+                // Place on board
+                board.PlacePiece(move.Column, currentPlayer.Symbol);
+
+                //win or draw
+                if (board.CheckForWin(currentPlayer.Symbol))
+                {
+                    Console.WriteLine($"Player {currentPlayer.Symbol} wins!");
+                    gameEnded = true;
+                }
+                else if (board.IsBoardFull())
+                {
+                    Console.WriteLine("It's a draw!");
+                    gameEnded = true;
+                }
+                else
+                {
+                    //next player turn
+                    currentPlayerIndex = (currentPlayerIndex + 1) % players.Length;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid move. Please choose another column.");
+            }
+        }
+    }
 }
