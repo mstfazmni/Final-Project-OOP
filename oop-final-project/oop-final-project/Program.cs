@@ -34,7 +34,7 @@ class Player
 //class to show board game
 class Board
 {
-    private cahr[,] grid;
+    private char[,] grid;
 
     public Board()
     {
@@ -46,7 +46,7 @@ class Board
     {
         for (int row = 0; row < 6; row++)
         {
-            for(int col = 0; col < 7; col++)
+            for (int col = 0; col < 7; col++)
             {
                 grid[row, col] = '-';
             }
@@ -55,9 +55,9 @@ class Board
 
     public void Print()
     {
-        for (int row =0; row < 6; row++)
+        for (int row = 0; row < 6; row++)
         {
-            for(int col = 0; col < 7; col++)
+            for (int col = 0; col < 7; col++)
             {
                 Console.Write(grid[row, col] + " ");
             }
@@ -71,9 +71,9 @@ class Board
         return grid[0, column] == '-';
     }
 
-    public void PlacePiece (int column, char symbol)
+    public void PlacePiece(int column, char symbol)
     {
-        for (int row = 5; row>=0; row--)
+        for (int row = 5; row >= 0; row--)
         {
             if (grid[row, column] == '-')
             {
@@ -98,9 +98,9 @@ class Board
         }
 
         //vertical win
-        for (int row = 0; row<3; row++)
+        for (int row = 0; row < 3; row++)
         {
-            for (int col = 0; col<7; col++)
+            for (int col = 0; col < 7; col++)
             {
                 if (grid[row, col] == symbol && grid[row + 1, col] == symbol && grid[row + 2, col] == symbol && grid[row + 3, col] == symbol)
                 {
@@ -112,19 +112,19 @@ class Board
         //diagonal win L to R
         for (int row = 0; row < 3; row++)
         {
-            for(int col = 0; col<4; col++)
+            for (int col = 0; col < 4; col++)
             {
                 if (grid[row, col] == symbol && grid[row + 1, col + 1] == symbol && grid[row + 2, col + 2] == symbol && grid[row + 3, col + 3] == symbol)
                 {
                     return true;
-                }   
+                }
             }
         }
 
         //diagonal win R to L
-        for (int row = 0; row< 3; row++)
+        for (int row = 0; row < 3; row++)
         {
-            for (int col = 3; col<7; col++)
+            for (int col = 3; col < 7; col++)
             {
                 if (grid[row, col] == symbol && grid[row + 1, col - 1] == symbol && grid[row + 2, col - 2] == symbol && grid[row + 3, col - 3] == symbol)
                 {
@@ -139,9 +139,9 @@ class Board
     public bool IsBoardFull()
     {
         //check full
-        for(int row = 0; row < 6; row++)
+        for (int row = 0; row < 6; row++)
         {
-            for (int col = 0; col<7; col++)
+            for (int col = 0; col < 7; col++)
             {
                 if (grid[row, col] == '-')
                 {
@@ -207,5 +207,18 @@ class Game
                 Console.WriteLine("Invalid move. Please choose another column.");
             }
         }
+    }
+}
+
+//run game
+class Program
+{
+    static void Main(string[] args)
+    {
+        Player player1 = new Player('X');
+        Player player2 = new Player('O');
+
+        Game game = new Game(player1, player2);
+        game.Start();
     }
 }
