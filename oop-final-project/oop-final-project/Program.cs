@@ -209,3 +209,16 @@ class Game
         }
     }
 }
+
+//run game
+class Program
+{
+    static void Main(string[] args)
+    {
+        Player palyer1 = new Player('X');
+        Player player2 = new Player('O');
+
+        Game game = new Game(player1, player2);
+        game.Start();
+    }
+}
